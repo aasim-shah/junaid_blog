@@ -24,7 +24,7 @@
 
 <div class="flex flex-col sm:flex-row">
 
-    <div class="w-11/12  sm:w-7/12   my-2 ml-auto bg-white overflow-y-scroll h-[85vh] scrollY">
+    <div class="w-11/12  sm:w-7/12   my-2 mx-auto sm:ml-auto bg-white overflow-y-scroll h-[85vh] scrollY">
         <% if(articles.length > 0) {%>
             <% articles.forEach((article)=>{%>
                 
@@ -76,7 +76,7 @@
 <div class="flex flex-col mt-6 sm:w-4/12">
     <div class="flex ml-5 ">
         <div class="border py-2 px-2 h-fit rounded-md border-green-500 my-4 w-11/12 mx-auto">
-         <p class="text-lg my-2  px-2 border-b-4 w-40 border-yellow-500 mx-2">RECENT POSTS</p>
+         <p class="text-lg my-2  px-2 border-b-4 w-40 border-[#215f45fd] mx-2">RECENT POSTS</p>
 
          <% if(articles.length > 0) {%>
             <% articles.slice(0, 6).forEach((article)=>{%>
@@ -95,7 +95,7 @@
      
      <div class="flex ml-5 ">
          <div class="border py-2 px-2 h-fit rounded-md border-green-500 my-4 w-11/12 mx-auto">
-          <p class="text-lg my-2  px-2 border-b-4  border-yellow-500 mx-2">Join Us On Social Media</p>
+          <p class="text-lg my-2  px-2 border-b-4  border-[#215f45fd] mx-2">Join Us On Social Media</p>
             <div class="flex flex-row justify-center items-center my-6">
                 <a href=""><i class="fa-brands fa-square-facebook fa-2xl text-blue-700"></i></a>
                 <a href=""><i class="fa-brands fa-instagram ml-3 fa-2xl text-orange-700"></i></a>
@@ -105,7 +105,6 @@
       </div>
 </div>
 </div>
-    
     
     
     
