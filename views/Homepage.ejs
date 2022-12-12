@@ -1,0 +1,119 @@
+
+    <%- include('reuseables/Header.ejs') %>
+    <%- include('reuseables/Navbar.ejs') %>
+
+
+
+    <% if(messages.success){%>
+        <p class="text-black w-9/12 sm:w-6/12 mx-auto py-2 bg-green-200 rounded-md text-center my-2"><%= messages.success %></p>
+  <% }  %>
+  <% if(messages.error){%>
+    <p class="text-black w-8/12 mx-auto py-2 bg-red-200 text-center my-2 rounded-md"><%= messages.error %></p>
+    <% }  %>
+
+<!-- 
+<div class="w-11/12 sm:w-6/12 py-3 px-2 my-2 mx-auto bg-gray-100">
+    <div class="flex flex-row justify-between items-center">
+        <p class="text-lg">You have some thing in your mind  ? </p>
+        <a href="/article/new" class="py-1 px-3 bgThemeClr text-white font-bold rounded-md w-[7rem] text-center">Add Post</a>
+    </div>
+</div> -->
+
+
+
+
+<div class="flex flex-col sm:flex-row">
+
+    <div class="w-11/12  sm:w-7/12   my-2 ml-auto bg-white overflow-y-scroll h-[85vh] scrollY">
+        <% if(articles.length > 0) {%>
+            <% articles.forEach((article)=>{%>
+                
+                <div class="grid grid-cols-12  bg-gray-100 py-2 rounded-md mt-3 px-2 overflow-hidden">
+                    <div class="col-span-12">
+                        <a href="/article/view/<%= article._id %>">
+                            <img src="/uploads/<%= article.image %>"   class="min-w-[24rem] mx-auto" alt="image">
+                        </a>
+                    </div>
+                    
+                    <div class="col-span-12  sm:ml-4 relative">
+                        <% if((user) && (user.isAdmin)){%>
+                            <%  let userId = (user._id).toString(); let authorId = (article.authorId).toString(); %>
+                            <% if(userId === authorId){ %>
+                                <div class="okay mt-3">  <a href="/article/edit/<%= article._id %>" class="absolute bg-yellow-400 right-9 w-8 h-8 rounded-md flex justify-center items-center"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="/article/delete/<%= article._id %>" onclick = "if (! confirm('<%= user.firstName %> :  Are you sure you want to Delete this post ?')) { return false; }" class="absolute bg-red-400 right-0 w-8 h-8  rounded-md flex justify-center items-center"><i class="fa-solid fa-trash"></i></a></div>
+                                    <%}%>
+                                    <%}%>
+                                    <a href="/article/view/<%= article._id %>">
+                                        <p class="text-[1rem] sm:text-[1.2rem] textThemeClr  w-9/12 font-bold"><%= article.headline %></p>
+                                    </a>
+                                    
+                                    <p class="text-[1rem] sm:text-md mt-2 font-semibold"><%= article.subHeadline %></p>
+                                    
+                                    <p class="text-[0.9rem] sm:text-md mt-2 "><%= article.content %></p>
+                                    
+                                    <div class="flex flex-row mx-4 justify-end mt-2 items-center">
+            
+                <span class="text-sm text-gray-500 flex flex-row justify-between items-center">by :
+                    
+                    
+                    <% if(article.authorProfilePic){ %>
+                        <img src="/uploads/<%= article.authorProfilePic %>" class="w-6 h-6 mx-2 rounded-md" alt=""> 
+                        <% }else{ %>
+                            <img  src="/assets/user1.png" alt="profile_Img"  class="w-6 h-6 mx-2"   alt="">
+                        <% }  %>
+                        <%= article.authorName %></span>
+                    </div>
+                </div>       
+    </div>
+
+    <% }) %>
+    <% }else{ %>
+        <p class="text-xl text-center  my-3">No Article Found !!</p>
+        <%}%>
+    </div>
+    
+
+<div class="flex flex-col mt-6 sm:w-4/12">
+    <div class="flex ml-5 ">
+        <div class="border py-2 px-2 h-fit rounded-md border-green-500 my-4 w-11/12 mx-auto">
+         <p class="text-lg my-2  px-2 border-b-4 w-40 border-yellow-500 mx-2">RECENT POSTS</p>
+
+         <% if(articles.length > 0) {%>
+            <% articles.slice(0, 6).forEach((article)=>{%>
+         <div class="ml-2 my-6">
+             <p class="pb-4 text-md textThemeClr border-b-2 border-yellow-300 py-1 px-2">
+                <a href="/article/view/<%= article._id %>">
+                <%= article.headline %>
+                </a></p>
+         </div>
+
+         <%}) %>
+         <%} %>
+        </div>
+     </div>
+     
+     
+     <div class="flex ml-5 ">
+         <div class="border py-2 px-2 h-fit rounded-md border-green-500 my-4 w-11/12 mx-auto">
+          <p class="text-lg my-2  px-2 border-b-4  border-yellow-500 mx-2">Join Us On Social Media</p>
+            <div class="flex flex-row justify-center items-center my-6">
+                <a href=""><i class="fa-brands fa-square-facebook fa-2xl text-blue-700"></i></a>
+                <a href=""><i class="fa-brands fa-instagram ml-3 fa-2xl text-orange-700"></i></a>
+                <a href=""><i class="fa-brands fa-youtube ml-3 fa-2xl text-red-700"></i></a>
+            </div>
+         </div>
+      </div>
+</div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <%- include('reuseables/Footer.ejs') %>
+
